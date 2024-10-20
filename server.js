@@ -5,7 +5,13 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const appointmentRoutes = require('./routes/bookingRoute'); 
 const registerRoutes = require('./routes/registerRoute'); 
+const loginRoutes = require('./routes/loginRoute');
+const dashboardRoutes = require('./routes/dashboardRoute');
 const session = require('express-session');
+
+
+const app = express();
+const port = 3000;
 
 // Other requires and setup...
 
@@ -17,8 +23,6 @@ app.use(session({
 }));
 
 
-const app = express();
-const port = 3000;
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,7 +38,8 @@ app.get('/', (req, res) => {
   });
   
 app.use('/', appointmentRoutes);
-
+app.use('/', dashboardRoutes);
+app.use('/', loginRoutes);
 app.use(registerRoutes);
 
 // Route for the about page
@@ -59,6 +64,10 @@ app.get('/register', (req, res) => {
 
   app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.ejs'));
 });
 //port listening
 app.listen(port, () => {
