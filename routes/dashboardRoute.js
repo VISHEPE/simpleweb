@@ -11,7 +11,7 @@ router.get('/dashboard', (req, res) => {
     const userId = req.session.user.id;
 
     // Query to get user bookings
-    const bookingQuery = 'SELECT * FROM patients WHERE userId = ?'; // Adjust to match your database schema
+    const bookingQuery = 'SELECT * FROM patients WHERE id = ?'; // Adjust to match your database schema
     db.query(bookingQuery, [userId], (err, bookings) => {
         if (err) {
             console.error('Error fetching patient:', err);
