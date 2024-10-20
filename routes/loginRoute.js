@@ -1,25 +1,39 @@
-app.post('/login', (req, res) => {
+// loginRoute.js
+const express = require('express');
+const router = express.Router();
+const db = require('../database/db'); // Import the database connection
+const bcrypt = require('bcrypt');
+
+router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
-    // Find the user in the database
     const query = 'SELECT * FROM patients WHERE email = ?';
     db.query(query, [email], (err, results) => {
         if (err) {
-            console.error('Error fetching user:', err);
-            return res.status(500).send('An error occurred while logging in.');
+            console.error('Error querying user:', err);
+            return res.status(500).send('An error occurred during login.');
         }
 
-        if (results.length === 0) {
-            return res.status(401).send('Invalid email or password.');
-        }
-
-        const user = results[0];
-
-        // Compare the hashed password
-        if (bcrypt.compareSync(password, user.password_hash)) {
-            res.send(`Welcome, ${user.first_name}!`); // Successful login
+        if (results.length > 0) {
+            const user = results[0];
+            if (bcrypt.compareSync(password, user.password_hash)) {
+                // Successful login, store user info in session
+                req.session.user = {
+                    id: user.id,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    email: user.email
+                };
+                res.redirect('/dashboard'); // Redirect to dashboard after login
+            } else {
+                res.status(401).send('Incorrect password.');
+            }
         } else {
-            res.status(401).send('Invalid email or password.');
+            res.status(404).send('User not found.');
         }
     });
-})
+});
+
+
+module.exports = router; // Export the router
+
