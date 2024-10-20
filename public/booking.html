@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Session with a Doctor</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: link to a CSS file -->
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">TeleMedi</div>
+                <nav>
+                    <div class="hamburger">☰</div>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="/register">register</a></li>
+                        <li><a href="/doctors">Doctors</a></li>
+                        <li><a href="/about">about</a></li>
+                        <li><a href="/contact">contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <h1>Book a Session with a Doctor</h1>
+
+    <div class="booking-form">
+        <form action="/book-session" method="POST">
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" name="userName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="doctor">Select Doctor:</label>
+            <select id="doctor" name="doctor" required>
+                <option value="">Select a doctor</option>
+                <option value="Dr. John Hassan">Dr. Dr. John Hassan- Cardiology</option>
+                <option value="Dr. Jane wamalwa">Dr. Jane wamalwa - Dermatology</option>
+                <option value="Dr. Alice Kamau">Dr. Alice Kamau - Pediatrics</option>
+                <option value="Dr. Bob Otieno-">Dr. Bob Otieno- Orthopedics</option>
+            </select>
+
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="notes">Additional Notes:</label>
+            <textarea id="notes" name="notes" rows="4"></textarea>
+
+            <button type="submit">Book Session</button>
+        </form>
+    </div>
+
+</body>
+</html>
