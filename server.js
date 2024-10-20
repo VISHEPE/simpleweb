@@ -35,6 +35,9 @@ app.get('/about', (req, res) => {
   app.get('/booking', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'booking.html'));
 });
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'register.html'));
+});
 
   app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'contact.html'));
